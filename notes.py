@@ -81,4 +81,87 @@ def find_target(arr, target):
     return False
 
 
-print(find_target([1, 2, 3, 4], 4))
+# print(find_target([1, 2, 3, 4], 4))
+
+'''
+Stack is a data structure
+stack is like a todo list that you wrote then on sticky notes and pile them one over another
+so add one you have to push on the pile and to do one you have to pop it off of the pile 
+so 
+First in , last out -----> FILO
+or 
+Last in , first out -----> LIFO
+
+
+Whenever the program calls a function 
+1. the computer sets aside a chunk of memory for that function's execution context.
+2 any var in that function will be stored here 
+
+The computer stores these chunks of memory in the call stack, which has 2 fundamental operatios and the are 
+pushing onto the top and popping off the top of the call stack
+the pushing happens when we call the function 
+the popping when that function returns   
+'''
+# def recursive_fib(n):
+#     if n <= 1:
+#         return n
+#     else:
+#         n_minus_1 = recursive_fib(n-1)
+#         n_minus_2 = recursive_fib(n-2)
+#         return n_minus_1 + n_minus_2
+
+# print("s",recursive_fib(4))
+
+# this is bad implementation because there is no base case to stop the recursion
+'''
+def countdown(n):
+    countdown(n-1)
+
+
+countdown(5)
+'''
+
+# def countdown(n):
+#     if n == 0:
+#         return
+#     countdown(n-1)
+
+
+# countdown(5)
+
+
+# recursive sum
+def recursive_sum(items):
+    if len(items) == 1:
+        return items[0]
+    return items[0] + recursive_sum(items[1:])
+
+
+'''
+Quick Sort--
+it is a way to solve problems recursively using a technique where is only one element in the list
+
+'''
+
+
+def quicksort(data):
+
+    # First
+    # choose a pivot
+    # first element or the last one are the easiest
+    # middle, median are better to perform
+    if len(data) <= 1:
+        return data
+    pivot = data[0]
+    lhs = []
+    rhs = []
+    for cur in data[1:]:
+        if cur <= pivot:
+            lhs.append(cur)
+        else:
+            rhs.append(cur)
+
+    return quicksort(lhs) + [pivot] + quicksort(rhs)
+
+
+print(quicksort([1,4,5,3,5,2,9,11,7]))
