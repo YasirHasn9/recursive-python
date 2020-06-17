@@ -4,54 +4,41 @@ def merge(arrA, arrB):
     merged_arr = [0] * elements
 
     # Your code here
-    merge_sort = merge_sort(merged_arr)
-    return merge_sort
+    i = j = k = 0
+
+    while i < len(arrA) and j < len(arrB):
+        if arrA[i] < arrB[j]:
+            merged_arr[k] = arrA[i]
+            i += 1
+        else:
+            merged_arr[k] = arrB[j]
+            j += 1
+        k += 1
+
+    while i < len(arrA):
+        merged_arr[k] = arrA[i]
+        i += 1
+        k += 1
+
+    while j < len(arrB):
+        merged_arr[k] = arrB[j]
+        j += 1
+        k += 1
+
+    return merged_arr
 
 # TO-DO: implement the Merge Sort function below recursively
-
-
 def merge_sort(arr):
+    # Your code here
     if len(arr) > 1:
-        # find the middle of the list
-        mid = len(arr)//2
-        # divide it into 2 halves
-        L = arr[:mid]
-        R = arr[mid:]
+        middle = len(arr)//2
+        LHS = merge_sort(arr[:middle])
+        RHS = merge_sort(arr[middle:])
 
-
-# divide and conquer each list
-        merge_sort(L)
-        merge_sort(R)
-
-# start form 0 index in each list and compar it to the other index in the other lisrt
-        i = j = k = 0
-
-        # Copy data to temp arrays L[] and R[]
-        while i < len(L) and j < len(R):
-            # loop over every index in the left and compar it to the right
-            # and push the item to the main list
-            if L[i] < R[j]:
-                arr[k] = L[i]
-                i += 1
-            else:
-                # loop over every index in the right and compar it to the left
-                # and push the item to the main list
-                arr[k] = R[j]
-                j += 1
-            k += 1
-
-        # Checking if any element was left
-        while i < len(L):
-            arr[k] = L[i]
-            i += 1
-            k += 1
-
-        while j < len(R):
-            arr[k] = R[j]
-            j += 1
-            k += 1
+        arr = merge(LHS, RHS)
 
     return arr
+
 
 # STRETCH: implement the recursive logic for merge sort in a way that doesn't
 # utilize any extra memory
